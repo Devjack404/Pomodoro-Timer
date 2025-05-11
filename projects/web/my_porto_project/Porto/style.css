@@ -1,0 +1,224 @@
+body {
+    background-color: #474744;
+}
+
+.container {
+    background-color: #252525;
+    border-radius: 30px;
+    max-width: 90%; /* Adjusted for better responsiveness */
+    width: 100%; /* Full width on smaller screens */
+    margin: 0 auto; /* Center the container */
+    padding: 20px; /* Added padding for better spacing */
+}
+
+.box {
+    border-style: inset;
+    border-width: 3px;
+    border-radius: 15px;
+    margin: 30px auto; /* Reduced margin for smaller screens */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    width : 90%;
+}
+
+.home {
+    color: #E8E8C6;
+    font-size: 2.5em; /* Responsive font size */
+    font-weight: bold;
+    font-family:"Jersey 15";
+    text-rendering: pixelated; /* Pixelated rendering for retro effect */
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+    width: 100%;
+    margin: 16px auto; /* Centered with margin */
+    
+}
+
+@media (max-width: 1220px) {
+    .bar{
+        align-items: center; /* Center align items */
+        gap: px;
+    }
+
+    .bar{
+        width: 40px;
+        height: 40px;
+    }
+}
+
+h1{
+    margin: 12px auto;
+}
+
+.title {
+    color: #E8E8C6;
+    font-size: 6em; /* Responsive font size */
+    text-align: center;
+    font-family: "Jersey 15";
+    margin: 20px 0; /* Adjusted margins */
+}
+
+
+.content img {
+    width: 80%; /* Full width for images */
+    height: auto;
+    border-radius: 50px;
+    border-style: inset;
+    border-width: 10px;
+    display: block;
+    margin: 0 auto; /* Centered with margin */
+}
+
+.bar {
+    border-radius: 20px;
+    background-color: #E8E8C6;
+    display: flex;
+    justify-content: center; /* Space icons evenly */
+    padding: 10px ;
+    margin: 5em auto;
+    align-items: center;
+    width: 80%;
+    justify-content: space-between;
+    
+    
+}
+
+.icon-button{
+    background-color: transparent; /* Transparent background */
+    border: none; /* No border */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: transform 0.3s; /* Smooth transition for hover effect */
+    gap: 16px;
+}
+
+.alien-icon, .shop-icon, .lamp-icon {
+    width: 100px; /* Responsive width */
+    height: 100px;
+    object-fit: cover;
+    display: block;
+    image-rendering: pixelated; /* Pixelated rendering for retro effect */
+}
+
+.star-icon, .cat-icon{
+    width: 40px; /* Responsive width */
+    height: 40px;
+    object-fit: cover;
+    display: block;
+    image-rendering: pixelated; /* Pixelated rendering for retro effect */
+    
+}
+
+.about-container{
+    margin: 70px auto;
+    padding: 20px;
+    /*background-color: #E8E8C6;*/
+    width: 80%;
+    height: 100%;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    position: relative;
+}
+
+.about-text {
+    margin: 70px 60px;
+    flex: 1;
+    display: inline-block;
+    box-sizing: border-box;
+    padding: auto; 
+    /*background-color: aquamarine;*/
+    display: block;
+    color: #E8E8C6;
+
+}
+
+
+.about-text h2 {
+    
+    font-size: 6em; /* Responsive font size */
+    font-weight: bold;
+    width: auto;
+    padding: 10px;
+    margin: -10px;
+    font-family: "Jersey 15";
+    
+    
+}
+
+.about-text p {
+    font-size: 4em; /* Responsive font size */
+    font-family: "Jersey 15";
+    text-align: left;
+}
+
+.my-photo {
+
+    flex: 1;
+    padding: 20px 10px;
+    justify-content: center;
+    /*background-color: black;*/
+    display: flex;
+    margin: 0 auto; /* Centered with margin */
+
+}
+
+hr {
+    transform: rotate(90deg);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(90deg);
+    height: 2px;
+    width: 450px; /* Full width */
+    background-color: black;
+    margin: 20px 0; /* Adjusted margins */
+}
+
+.jack-photo {
+    width: 300px; /* Full width for the photo */
+    border-radius: 10px;
+    height: auto;
+    border-style: inset;
+    border-width: 10px;
+    
+}
+
+
+/* Media Queries for Smaller Screens */
+@media (max-width: 1220px) {
+    .container {
+        background-color: #252525; /* Change background for smaller screens */
+    }
+}
+
+@media (max-width: 601px) {
+    .title {
+        font-size: 1.8em; /* Smaller font size for mobile */
+    }
+
+    .home {
+        font-size: 1.2em; /* Smaller font size for mobile */
+    }
+    .about-text {
+        justify-content: left;
+    }
+
+    }
+    .about-text h2 {
+        font-size: 1.5em; /* Smaller font size for mobile */
+    }
+
+    .about-text p {
+        font-size: 1em; /* Smaller font size for mobile */
+    }
+
+    .my-photo {
+        width: 30%; /* Full width for the photo */
+        padding: 10px; /* Adjusted padding */
+    }
+}
