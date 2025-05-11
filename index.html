@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pomodoro Timer</title>
+
+  <!-- GSAP CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- Background Overlay -->
+  <div class="overlay"></div>
+
+  <!-- Konten Utama -->
+  <div class="container">
+    <h1 id="title">STUDY WITH AS</h1>
+
+    <!-- Mode Buttons -->
+    <div id="modeButtons">
+      <button class="mode-btn active" onclick="setMode('pomodoro')">Pomodoro</button>
+      <button class="mode-btn" onclick="setMode('short')">Short Break</button>
+      <button class="mode-btn" onclick="setMode('long')">Long Break</button>
+    </div>
+
+    <!-- Timer -->
+    <div id="timerDisplay">25:00</div>
+
+    <!-- Kontrol Tombol -->
+    <div id="controlButtons">
+      <button id="startBtn" class="control-btn" onclick="startTimer()">Start</button>
+      <button class="icon-btn" onclick="resetTimer()">🔁</button>
+      <button class="icon-btn">⚙️</button>
+    </div>
+
+    <!-- Musik Player -->
+    <div class="music-box">
+      <button onclick="toggleMusic()" class="control-btn">🎵 Play Musik</button>
+      <p id="musicStatus" style="margin-top: 8px; font-size: 0.85rem;">Musik: OFF</p>
+    </div>
+  </div>
+
+  <!-- Nada dering otomatis -->
+  <audio id="alarmSound" src="ding.mp3" preload="auto"></audio>
+
+  <!-- Musik manual -->
+  <audio id="bgMusic" src="lofi.mp3" loop></audio>
+
+  <!-- Custom Script -->
+  <script src="script.js"></script>
+</body>
+</html>
