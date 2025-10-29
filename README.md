@@ -7,7 +7,7 @@ Pomodoro Timer adalah aplikasi web timer sederhana dan estetis yang dirancang un
 
 -----
 
-![Bg-Photos](https://github.com/Devjack404/Pomodoro-Timer/blob/main/photos/bg.jpg)
+![Bg-Photos](https://github.com/Devjack404/Pomodoro-Timer/blob/main/photos/Pomodoro.png)
 
 
 ## ✨ Fitur Utama
