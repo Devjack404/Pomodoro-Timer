@@ -42,7 +42,7 @@ Aplikasi ini adalah **frontend murni** dan tidak memerlukan *server* atau *packa
 
 1.  **Clone** repositori ini ke komputer Anda:
     ```bash
-    git clone [url-repositori-anda]
+    git clone https://github.com/Devjack404/Pomodoro-Timer/
     ```
 2.  **Buka** folder project:
     ```bash
