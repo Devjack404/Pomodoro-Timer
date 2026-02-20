@@ -1,6 +1,6 @@
 /* --- Layout Dasar --- */
 body {
-    background-image: url('photos/bg.jpg');
+    background-image: url('photos/bg.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -19,7 +19,7 @@ body {
   .overlay {
     position: absolute;
     inset: 0;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.2);
     z-index: 0;
   }
   
