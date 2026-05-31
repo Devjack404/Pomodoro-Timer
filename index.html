@@ -5,6 +5,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Pomodoro Timer</title>
 
+        <!-- Google Fonts (Dancing Script for Cursive/Latin Title) -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&display=swap"
+            rel="stylesheet"
+        />
+
         <!-- GSAP CDN -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
@@ -16,10 +24,11 @@
         <!-- Background Overlay -->
         <div class="overlay"></div>
 
+        <!-- Judul Pojok Kiri Atas -->
+        <h1 id="title">Study with AS</h1>
+
         <!-- Konten Utama -->
         <div class="container">
-            <h1 id="title">STUDY WITH AS</h1>
-
             <!-- Mode Buttons -->
             <div id="modeButtons">
                 <button class="mode-btn active" onclick="setMode('pomodoro')">
@@ -113,7 +122,7 @@
                 </button>
             </div>
 
-            <!-- Musik Player -->
+            <!-- Musik Lofi Bawaan -->
             <div class="music-box">
                 <button onclick="toggleMusic()" class="control-btn">
                     🎵 Play Musik
@@ -133,11 +142,89 @@
                     />
                     <span>🔊</span>
                 </div>
-                <pmusicStatusstylemargin-top:8px;font-size:85rem
+
+                <p id="musicStatus" style="margin-top: 8px; font-size: 0.85rem">
                     Musik: OFF
-                p
+                </p>
             </div>
-                <!-- Settings Modal -->
+            <!-- ===== FOCUS MUSIC PLAYLIST ===== -->
+            <div class="focus-music-section">
+                <!-- Judul Section (Klik untuk Sembunyikan/Tampilkan) -->
+                <div
+                    class="focus-music-header"
+                    onclick="toggleFocusMusicSection()"
+                >
+                    <span class="focus-music-icon">🎧</span>
+                    <h3 class="focus-music-title">Focus Music</h3>
+                    <span class="fm-toggle-arrow">▲</span>
+                </div>
+
+                <!-- Konten Section yang Bisa Disembunyikan -->
+                <div class="focus-music-content">
+                    <!-- Input Link -->
+                    <div class="focus-music-input-group">
+                        <input
+                            type="text"
+                            id="musicLinkInput"
+                            placeholder="Paste link YouTube atau Spotify..."
+                            autocomplete="off"
+                            spellcheck="false"
+                        />
+                        <div class="focus-music-buttons">
+                            <button
+                                class="fm-btn fm-load-btn"
+                                onclick="loadMusic()"
+                            >
+                                ▶ Load Music
+                            </button>
+                            <button
+                                class="fm-btn fm-clear-btn"
+                                onclick="clearMusic()"
+                            >
+                                ✕ Clear
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Badge Platform yang Didukung -->
+                    <div class="fm-platform-badges">
+                        <span class="fm-badge fm-badge-yt"
+                            >▶ YouTube Video</span
+                        >
+                        <span class="fm-badge fm-badge-yt"
+                            >▶ YouTube Playlist</span
+                        >
+                        <span class="fm-badge fm-badge-sp"
+                            >♫ Spotify Track</span
+                        >
+                        <span class="fm-badge fm-badge-sp"
+                            >♫ Spotify Playlist</span
+                        >
+                    </div>
+
+                    <!-- Pesan Error Validasi -->
+                    <p id="musicError" class="fm-error"></p>
+
+                    <!-- Placeholder sebelum ada musik -->
+                    <div id="musicPlaceholder" class="fm-placeholder">
+                        <span class="fm-placeholder-icon">🎵</span>
+                        <p>
+                            Belum ada musik. Paste link di atas dan klik
+                            <strong>Load Music</strong>!
+                        </p>
+                    </div>
+
+                    <!-- Container iframe player -->
+                    <div
+                        id="musicPlayerContainer"
+                        class="fm-player-container"
+                    ></div>
+                </div>
+            </div>
+            <!-- ===== END FOCUS MUSIC ===== -->
+        </div>
+
+        <!-- Settings Modal -->
         <div id="settingsModal" class="modal">
             <div class="modal-content">
                 <span class="close-btn" onclick="closeSettings()">&times;</span>
@@ -177,6 +264,7 @@
                 </button>
             </div>
         </div>
+
         <!-- Nada dering otomatis -->
         <audio id="alarmSound" src="ding.mp3" preload="auto"></audio>
 

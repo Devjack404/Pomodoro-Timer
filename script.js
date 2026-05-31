@@ -233,3 +233,192 @@ gsap.to("#controlButtons", { opacity: 1, y: 0, duration: 1, delay: 0.9 });
 
 // Tampilkan durasi pertama saat halaman dimuat
 updateDisplay();
+
+// ─────────────────────────────────────────────
+// 🎧 FOCUS MUSIC PLAYLIST
+// ─────────────────────────────────────────────
+
+// Ambil referensi elemen Focus Music dari DOM
+const musicLinkInput = document.getElementById("musicLinkInput");
+const musicErrorEl = document.getElementById("musicError");
+const musicPlayerWrap = document.getElementById("musicPlayerContainer");
+const musicPlaceholder = document.getElementById("musicPlaceholder");
+
+// ── Deteksi platform dari URL ──
+function detectPlatform(url) {
+  if (url.includes("youtube.com") || url.includes("youtu.be")) return "youtube";
+  if (url.includes("spotify.com")) return "spotify";
+  return null;
+}
+
+// ── Konversi link YouTube biasa → URL embed ──
+function parseYouTubeUrl(parsed) {
+  // Format playlist murni: youtube.com/playlist?list=XXX
+  if (parsed.pathname === "/playlist") {
+    const listId = parsed.searchParams.get("list");
+    if (listId)
+      return `https://www.youtube.com/embed/videoseries?list=${listId}`;
+  }
+
+  // Format video biasa atau video dengan playlist
+  let videoId = null;
+  if (parsed.hostname === "youtu.be") {
+    videoId = parsed.pathname.slice(1).split("?")[0];
+  } else if (parsed.pathname === "/watch") {
+    videoId = parsed.searchParams.get("v");
+  }
+
+  if (videoId) {
+    const listId = parsed.searchParams.get("list");
+    // Jika ada list, embed dengan playlist agar bisa lanjut ke lagu berikutnya
+    return listId
+      ? `https://www.youtube.com/embed/${videoId}?list=${listId}`
+      : `https://www.youtube.com/embed/${videoId}`;
+  }
+
+  return null;
+}
+
+// ── Konversi link Spotify biasa → URL embed ──
+function parseSpotifyUrl(parsed) {
+  // Ambil segmen path: ['track'|'playlist'|'album', 'ID']
+  const parts = parsed.pathname.split("/").filter(Boolean);
+  if (parts.length >= 2) {
+    const type = parts[0];
+    const id = parts[1].split("?")[0]; // bersihkan query string
+    if (["track", "playlist", "album", "episode"].includes(type)) {
+      return `https://open.spotify.com/embed/${type}/${id}?utm_source=generator`;
+    }
+  }
+  return null;
+}
+
+// ── Gabungkan deteksi + parse jadi satu fungsi utama ──
+function parseToEmbedUrl(url) {
+  try {
+    const parsed = new URL(url);
+    const platform = detectPlatform(url);
+    if (platform === "youtube") return parseYouTubeUrl(parsed);
+    if (platform === "spotify") return parseSpotifyUrl(parsed);
+    return null;
+  } catch {
+    return null; // URL tidak valid sama sekali
+  }
+}
+
+// ── Buat elemen <iframe> sesuai platform ──
+function createIframe(embedUrl, platform) {
+  const iframe = document.createElement("iframe");
+  iframe.src = embedUrl;
+  iframe.setAttribute("frameborder", "0");
+  iframe.setAttribute(
+    "allow",
+    "autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture",
+  );
+  iframe.setAttribute("allowfullscreen", "");
+  iframe.style.width = "100%";
+  iframe.style.borderRadius = "12px";
+  iframe.style.display = "block";
+  // Spotify compact = 152px; YouTube lebih tinggi
+  iframe.style.height = platform === "spotify" ? "152px" : "220px";
+  return iframe;
+}
+
+// ── Tampilkan pesan error dengan jelas ──
+function showMusicError(msg) {
+  musicErrorEl.textContent = msg;
+  musicErrorEl.style.display = "block";
+}
+
+function clearMusicError() {
+  musicErrorEl.textContent = "";
+  musicErrorEl.style.display = "none";
+}
+
+// ── LOAD MUSIC: baca input → parse → tampilkan iframe ──
+function loadMusic(silent = false) {
+  clearMusicError();
+
+  const link = musicLinkInput ? musicLinkInput.value.trim() : "";
+
+  // Validasi: link kosong
+  if (!link) {
+    if (!silent)
+      showMusicError(
+        "⚠️ Link tidak boleh kosong! Paste link YouTube atau Spotify dulu ya 😊",
+      );
+    return;
+  }
+
+  // Validasi: bukan URL yang dikenali
+  const embedUrl = parseToEmbedUrl(link);
+  if (!embedUrl) {
+    showMusicError(
+      "❌ Link tidak dikenali. Pastikan kamu paste link YouTube (video/playlist) atau Spotify (track/playlist) yang valid 🎵",
+    );
+    return;
+  }
+
+  // Simpan link ke localStorage agar muncul lagi saat refresh
+  localStorage.setItem("focusMusicLink", link);
+
+  // Buat dan tampilkan iframe player
+  const platform = detectPlatform(link);
+  const iframe = createIframe(embedUrl, platform);
+
+  musicPlayerWrap.innerHTML = "";
+  musicPlayerWrap.appendChild(iframe);
+  musicPlayerWrap.style.display = "block";
+
+  // Sembunyikan placeholder, animasikan player masuk
+  if (musicPlaceholder) musicPlaceholder.style.display = "none";
+  gsap.fromTo(
+    musicPlayerWrap,
+    { opacity: 0, y: 16 },
+    { opacity: 1, y: 0, duration: 0.45 },
+  );
+}
+
+// ── CLEAR MUSIC: hapus iframe + data localStorage ──
+function clearMusic() {
+  localStorage.removeItem("focusMusicLink");
+  if (musicLinkInput) musicLinkInput.value = "";
+  musicPlayerWrap.innerHTML = "";
+  musicPlayerWrap.style.display = "none";
+  if (musicPlaceholder) musicPlaceholder.style.display = "flex";
+  clearMusicError();
+}
+
+// ── Auto-load link terakhir dari localStorage saat halaman dibuka ──
+(function autoLoadSavedMusic() {
+  const saved = localStorage.getItem("focusMusicLink");
+  if (saved && musicLinkInput) {
+    musicLinkInput.value = saved;
+    loadMusic(true); // silent=true: jangan tampilkan error jika gagal
+  }
+})();
+
+// ── Izinkan tekan Enter di input untuk langsung load ──
+if (musicLinkInput) {
+  musicLinkInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") loadMusic();
+  });
+}
+
+// ── Tampilkan/Sembunyikan Menu Focus Music ──
+function toggleFocusMusicSection() {
+  const fmSection = document.querySelector(".focus-music-section");
+  if (!fmSection) return;
+
+  const isCollapsed = fmSection.classList.toggle("collapsed");
+  localStorage.setItem("fmSectionCollapsed", isCollapsed ? "true" : "false");
+}
+
+// ── Muat status Tampilkan/Sembunyikan terakhir dari localStorage ──
+(function loadFmSectionState() {
+  const fmSection = document.querySelector(".focus-music-section");
+  const isCollapsed = localStorage.getItem("fmSectionCollapsed") === "true";
+  if (isCollapsed && fmSection) {
+    fmSection.classList.add("collapsed");
+  }
+})();

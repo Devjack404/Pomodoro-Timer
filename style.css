@@ -4,15 +4,19 @@ body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    height: 100vh;
+    background-attachment: fixed;
+    min-height: 100vh;
     margin: 0;
-    padding: 0;
+    padding: 6rem 1rem 3rem; /* 6rem top padding ensures `#title` never overlaps with `.container` */
     font-family: "Segoe UI", sans-serif;
     color: white;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     position: relative;
+    box-sizing: border-box;
+    overflow-y: auto;
 }
 
 /* --- Overlay --- */
@@ -21,6 +25,7 @@ body {
     inset: 0;
     background-color: rgba(0, 0, 0, 0.4);
     z-index: 0;
+    pointer-events: none; /* Let clicks pass through overlay if any */
 }
 
 /* --- Kontainer Utama --- */
@@ -28,19 +33,25 @@ body {
     position: relative;
     z-index: 1;
     text-align: center;
-    max-width: 100%;
-    padding: 1rem;
+    max-width: 600px;
+    padding: 1.5rem 1rem;
     width: 100%;
     box-sizing: border-box;
+    margin: auto 0; /* Centers container vertically when there is space, but scrolls naturally when content overflows */
 }
 
-/* --- Judul --- */
+/* --- Judul Pojok Kiri Atas --- */
 #title {
-    font-size: 2.3rem;
-    font-weight: 300;
-    margin-bottom: 1.5rem;
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    font-family: "Dancing Script", cursive;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin: 0;
     letter-spacing: 1px;
-    text-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+    z-index: 2;
 }
 
 /* --- Tombol Mode --- */
@@ -306,10 +317,245 @@ body {
     transform: translateY(-2px);
 }
 
+/* ============================================
+   🎧 FOCUS MUSIC PLAYLIST
+   ============================================ */
+
+.focus-music-section {
+    max-width: 500px;
+    margin: 1.5rem auto 0;
+    background-color: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 1.4rem;
+    border-radius: 1rem;
+    backdrop-filter: blur(10px);
+    text-align: left;
+}
+
+/* Judul Section */
+.focus-music-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.2s ease;
+}
+
+.focus-music-header:hover .focus-music-title {
+    color: #ff8c42;
+}
+
+.focus-music-icon {
+    font-size: 1.3rem;
+}
+
+.focus-music-title {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: #f6b73c;
+    text-transform: uppercase;
+    transition: color 0.2s ease;
+}
+
+.fm-toggle-arrow {
+    font-size: 0.75rem;
+    opacity: 0.7;
+    transition: transform 0.25s ease;
+}
+
+/* Ketika Collapsed (Disembunyikan) */
+.focus-music-section.collapsed .focus-music-content {
+    display: none;
+}
+
+.focus-music-section.collapsed {
+    padding-bottom: 0.9rem;
+}
+
+.focus-music-section.collapsed .focus-music-header {
+    margin-bottom: 0;
+}
+
+.focus-music-section.collapsed .fm-toggle-arrow {
+    transform: rotate(180deg); /* Memutar anak panah ke bawah */
+}
+
+/* Input Link */
+.focus-music-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-bottom: 0.75rem;
+}
+
+.focus-music-input-group input {
+    width: 100%;
+    padding: 11px 16px;
+    border-radius: 9999px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 0.875rem;
+    outline: none;
+    transition:
+        border-color 0.25s,
+        background-color 0.25s;
+    box-sizing: border-box;
+}
+
+.focus-music-input-group input::placeholder {
+    color: rgba(255, 255, 255, 0.45);
+}
+
+.focus-music-input-group input:focus {
+    border-color: #f6b73c;
+    background-color: rgba(255, 255, 255, 0.14);
+}
+
+/* Tombol Load & Clear */
+.focus-music-buttons {
+    display: flex;
+    gap: 0.6rem;
+}
+
+.fm-btn {
+    padding: 10px 20px;
+    border-radius: 9999px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition:
+        transform 0.2s,
+        opacity 0.2s;
+    white-space: nowrap;
+}
+
+.fm-btn:hover {
+    transform: scale(1.04);
+    opacity: 0.92;
+}
+
+.fm-load-btn {
+    flex: 1;
+    background: linear-gradient(135deg, #f6b73c, #ff8c42);
+    color: white;
+    box-shadow: 0 4px 12px rgba(255, 140, 66, 0.35);
+}
+
+.fm-clear-btn {
+    flex: 0 0 auto;
+    background-color: rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.fm-clear-btn:hover {
+    background-color: rgba(255, 80, 80, 0.28);
+    border-color: rgba(255, 100, 100, 0.4);
+    color: white;
+}
+
+/* Badge platform yang didukung */
+.fm-platform-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 0.75rem;
+}
+
+.fm-badge {
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 9999px;
+    letter-spacing: 0.3px;
+}
+
+.fm-badge-yt {
+    background-color: rgba(255, 0, 0, 0.2);
+    border: 1px solid rgba(255, 60, 60, 0.35);
+    color: #ff9a9a;
+}
+
+.fm-badge-sp {
+    background-color: rgba(30, 215, 96, 0.15);
+    border: 1px solid rgba(30, 215, 96, 0.35);
+    color: #1ed760;
+}
+
+/* Pesan error */
+.fm-error {
+    display: none;
+    font-size: 0.82rem;
+    color: #ff9a9a;
+    background-color: rgba(255, 60, 60, 0.12);
+    border: 1px solid rgba(255, 80, 80, 0.25);
+    border-radius: 0.5rem;
+    padding: 0.6rem 0.9rem;
+    margin: 0 0 0.75rem;
+    line-height: 1.5;
+}
+
+/* Placeholder (sebelum ada musik dimuat) */
+.fm-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 1.4rem 1rem;
+    border: 1px dashed rgba(255, 255, 255, 0.2);
+    border-radius: 0.75rem;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.45);
+}
+
+.fm-placeholder-icon {
+    font-size: 2rem;
+    opacity: 0.6;
+}
+
+.fm-placeholder p {
+    margin: 0;
+    font-size: 0.82rem;
+    line-height: 1.5;
+}
+
+.fm-placeholder strong {
+    color: #f6b73c;
+}
+
+/* Container iframe player */
+.fm-player-container {
+    display: none;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+}
+
+.fm-player-container iframe {
+    display: block;
+    border: none;
+}
+
+/* ============================================ */
+
 /* --- Responsive Layout Extra --- */
 @media (max-width: 400px) {
+    body {
+        padding: 4.5rem 0.5rem 2rem; /* Adjusted top padding on small screens to fit title */
+    }
+
     #title {
         font-size: 1.6rem;
+        top: 1rem;
+        left: 1rem;
     }
 
     .mode-btn {
