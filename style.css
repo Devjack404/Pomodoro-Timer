@@ -1,30 +1,30 @@
 /* --- Layout Dasar --- */
 body {
-    background-image: url('photos/bg.png');
+    background-image: url("photos/bg.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     height: 100vh;
     margin: 0;
     padding: 0;
-    font-family: 'Segoe UI', sans-serif;
+    font-family: "Segoe UI", sans-serif;
     color: white;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
-  }
-  
-  /* --- Overlay --- */
-  .overlay {
+}
+
+/* --- Overlay --- */
+.overlay {
     position: absolute;
     inset: 0;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.4);
     z-index: 0;
-  }
-  
-  /* --- Kontainer Utama --- */
-  .container {
+}
+
+/* --- Kontainer Utama --- */
+.container {
     position: relative;
     z-index: 1;
     text-align: center;
@@ -32,27 +32,27 @@ body {
     padding: 1rem;
     width: 100%;
     box-sizing: border-box;
-  }
-  
-  /* --- Judul --- */
-  #title {
+}
+
+/* --- Judul --- */
+#title {
     font-size: 2.3rem;
     font-weight: 300;
     margin-bottom: 1.5rem;
     letter-spacing: 1px;
     text-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
-  }
-  
-  /* --- Tombol Mode --- */
-  #modeButtons {
+}
+
+/* --- Tombol Mode --- */
+#modeButtons {
     display: flex;
     gap: 0.75rem;
     justify-content: center;
     flex-wrap: wrap;
     margin-bottom: 2rem;
-  }
-  
-  .mode-btn {
+}
+
+.mode-btn {
     padding: 10px 20px;
     border-radius: 9999px;
     background-color: rgba(255, 255, 255, 0.25);
@@ -62,49 +62,49 @@ body {
     font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
-  }
-  
-  .mode-btn:hover {
+}
+
+.mode-btn:hover {
     background-color: rgba(255, 255, 255, 0.4);
-  }
-  
-  .mode-btn.active {
+}
+
+.mode-btn.active {
     background-color: white;
     color: black;
     font-weight: bold;
-  }
-  
-  /* --- Timer Display --- */
-  #timerDisplay {
+}
+
+/* --- Timer Display --- */
+#timerDisplay {
     font-size: 4rem;
     font-weight: bold;
     margin-bottom: 2rem;
     text-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
     letter-spacing: 2px;
-  }
-  
-  @media (min-width: 600px) {
+}
+
+@media (min-width: 600px) {
     #timerDisplay {
-      font-size: 5.5rem;
+        font-size: 5.5rem;
     }
-  }
-  
-  @media (min-width: 900px) {
+}
+
+@media (min-width: 900px) {
     #timerDisplay {
-      font-size: 6.5rem;
+        font-size: 6.5rem;
     }
-  }
-  
-  /* --- Tombol Kontrol --- */
-  #controlButtons {
+}
+
+/* --- Tombol Kontrol --- */
+#controlButtons {
     display: flex;
     justify-content: center;
     gap: 1.25rem;
     margin-bottom: 2rem;
     flex-wrap: wrap;
-  }
-  
-  .control-btn {
+}
+
+.control-btn {
     padding: 12px 24px;
     background-color: white;
     color: black;
@@ -115,56 +115,214 @@ body {
     cursor: pointer;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
     transition: transform 0.2s ease;
-  }
-  
-  .control-btn:hover {
+}
+
+.control-btn:hover {
     transform: scale(1.05);
-  }
-  
-  .icon-btn {
+}
+
+.icon-btn {
     font-size: 1.8rem;
     background: none;
     border: none;
     color: white;
     cursor: pointer;
     transition: transform 0.2s ease;
-  }
-  
-  .icon-btn:hover {
+}
+
+.icon-btn:hover {
     transform: scale(1.25);
-  }
-  
-  /* --- Musik Box --- */
-  .music-box {
+}
+
+/* --- Musik Box --- */
+.music-box {
     max-width: 400px;
     margin: 0 auto;
     background-color: rgba(255, 255, 255, 0.1);
-    padding: 1rem;
+    padding: 1.2rem;
     border-radius: 0.75rem;
     backdrop-filter: blur(6px);
     font-size: 0.875rem;
     text-align: center;
     word-wrap: break-word;
-  }
-  
-  /* --- Responsive Layout Extra --- */
-  @media (max-width: 400px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.volume-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 0.5rem;
+    width: 100%;
+    max-width: 200px;
+}
+
+.volume-container input[type="range"] {
+    flex: 1;
+    height: 6px;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.3);
+    outline: none;
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.volume-container input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.volume-container input[type="range"]::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+/* --- Settings Modal --- */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-content {
+    background-color: rgba(30, 30, 40, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+    padding: 2rem;
+    border-radius: 1.25rem;
+    width: 90%;
+    max-width: 360px;
+    color: white;
+    text-align: left;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    position: relative;
+    animation: modalFadeIn 0.3s ease-out;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.close-btn {
+    position: absolute;
+    right: 1.5rem;
+    top: 1rem;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #ccc;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.close-btn:hover {
+    color: #ff8c42;
+}
+
+.modal-content h2 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    color: #f6b73c;
+    text-align: center;
+}
+
+.settings-group {
+    margin-bottom: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.settings-group label {
+    font-size: 0.9rem;
+    color: #ddd;
+}
+
+.settings-group input {
+    padding: 10px;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.settings-group input:focus {
+    border-color: #f6b73c;
+}
+
+.save-btn {
+    width: 100%;
+    margin-top: 1rem;
+    background: linear-gradient(135deg, #f6b73c, #ff8c42);
+    color: white;
+    font-weight: bold;
+    border: none;
+    transition:
+        opacity 0.2s,
+        transform 0.2s;
+}
+
+.save-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+/* --- Responsive Layout Extra --- */
+@media (max-width: 400px) {
     #title {
-      font-size: 1.6rem;
+        font-size: 1.6rem;
     }
-  
+
     .mode-btn {
-      font-size: 0.9rem;
-      padding: 8px 14px;
+        font-size: 0.9rem;
+        padding: 8px 14px;
     }
-  
+
     .control-btn {
-      font-size: 0.95rem;
-      padding: 10px 18px;
+        font-size: 0.95rem;
+        padding: 10px 18px;
     }
-  
+
     #timerDisplay {
-      font-size: 3.5rem;
+        font-size: 3.5rem;
     }
-  }
-  
+}
