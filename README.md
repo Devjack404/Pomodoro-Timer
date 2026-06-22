@@ -30,6 +30,14 @@ Pomodoro Timer adalah aplikasi web timer sederhana dan estetis yang dirancang un
   * **CSS3**
   * **JavaScript (Vanilla JS)**
   * **GSAP (Greensock Animation Platform)**: Digunakan untuk animasi antarmuka.
+  * Frontend  : React / HTML CSS JS
+Backend   : Node.js + Express.js
+Database  : PostgreSQL atau MySQL
+ORM       : Prisma
+Auth      : JWT + bcrypt
+Testing   : Postman
+Deploy    : Railway / Render
+
 
 -----
 
