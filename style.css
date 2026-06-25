@@ -89,12 +89,9 @@ body {
 .container {
     position: relative;
     z-index: 1;
-    background: var(--color-glass-bg);
-    border: 1px solid var(--color-glass-border);
+    background: none;
+    border: none;
     border-radius: var(--radius-container);
-    box-shadow: var(--color-glass-shadow);
-    /* backdrop-filter: blur(10px); */
-    /* -webkit-backdrop-filter: blur(18px); */
     padding: 44px 48px 40px;
     max-width: 480px;
     width: calc(100% - 32px);
