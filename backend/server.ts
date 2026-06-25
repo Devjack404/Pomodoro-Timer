@@ -4,11 +4,15 @@ const app = express();
 const port = 3000;
 
 app.get('/home', (req, res) => {
-  
+  console.log('hello')
 })
 
 app.post('/login', (req, res) => {
-  res.send('') 
+  res.send('hello01') 
+})
+
+app.get('/register', (req, res) => {
+  res.send('fitur segera dibuat')
 })
 
 app.listen(port, () => {

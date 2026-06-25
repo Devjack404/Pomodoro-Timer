@@ -70,9 +70,7 @@ body {
     position: relative;
 }
 
-/* =============================
-   OVERLAY
-   ============================= */
+/* OVERLAY */
 .overlay {
     position: fixed;
     inset: 0;
@@ -83,9 +81,7 @@ body {
     pointer-events: none;
 }
 
-/* =============================
-   CONTAINER (Glassmorphism)
-   ============================= */
+/* CONTAINER main */
 .container {
     position: relative;
     z-index: 1;
@@ -105,9 +101,7 @@ body {
     transform: translateY(24px);
 }
 
-/* =============================
-   TITLE
-   ============================= */
+/* TITLE */
 #title {
     font-size: 0.78rem;
     font-weight: 500;
