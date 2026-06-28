@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Pomodoro Timer</title>
+        <meta
+            name="description"
+            content="Deep focus Pomodoro Timer for ambitious students. Minimalist, modern, and distraction-free."
+        />
+
+        <!-- GSAP CDN -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="./style.css" />
+    </head>
+
+    <body>
+        <!-- Background Overlay -->
+        <div class="overlay"></div>
+
+        <!-- ═══════════════════════════════════
+       MAIN CONTAINER
+  ════════════════════════════════════ -->
+        <div class="container">
+            <!-- Title / Label -->
+            <h1 id="title">STUDY WITH AS</h1>
+
+            <!-- Mode Pills -->
+            <div id="modeButtons">
+                <button
+                    class="mode-btn active"
+                    data-mode="pomodoro"
+                    onclick="setMode('pomodoro')"
+                >
+                    Pomodoro
+                </button>
+                <button
+                    class="mode-btn"
+                    data-mode="short"
+                    onclick="setMode('short')"
+                >
+                    Short Break
+                </button>
+                <button
+                    class="mode-btn"
+                    data-mode="long"
+                    onclick="setMode('long')"
+                >
+                    Long Break
+                </button>
+            </div>
+
+            <!-- Timer Core -->
+            <div id="timerDisplay">25:00</div>
+
+            <!-- Progress Bar -->
+            <div class="progress-wrap">
+                <div class="progress-bar"></div>
+            </div>
+
+            <!-- Session Dots -->
+            <div class="session-tracker">
+                <div class="session-dot"></div>
+                <div class="session-dot"></div>
+                <div class="session-dot"></div>
+                <div class="session-dot"></div>
+            </div>
+
+            <!-- Control Buttons -->
+            <div id="controlButtons">
+                <button
+                    class="icon-btn"
+                    onclick="resetTimer()"
+                    title="Reset (R)"
+                >
+                    ↺
+                </button>
+                <button
+                    id="startBtn"
+                    class="control-btn"
+                    onclick="startTimer()"
+                >
+                    Start
+                </button>
+                <button
+                    class="icon-btn"
+                    onclick="openSettings()"
+                    title="Settings"
+                >
+                    ⚙
+                </button>
+            </div>
+
+            <!-- Music Box -->
+            <div class="music-box">
+                <div class="music-info">
+                    <span class="music-label">Ambient</span>
+                    <p id="musicStatus">Lofi: OFF</p>
+                </div>
+                <button id="musicBtn" onclick="toggleMusic()">
+                    <span class="music-icon">🎵</span> Play
+                </button>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════
+       SETTINGS MODAL
+  ════════════════════════════════════ -->
+        <div class="settings-overlay">
+            <div class="settings-panel">
+                <h2>Settings</h2>
+
+                <div class="settings-row">
+                    <label for="inputPomodoro">Focus duration (min)</label>
+                    <input
+                        type="number"
+                        id="inputPomodoro"
+                        value="25"
+                        min="1"
+                        max="90"
+                    />
+                </div>
+                <div class="settings-row">
+                    <label for="inputShort">Short break (min)</label>
+                    <input
+                        type="number"
+                        id="inputShort"
+                        value="5"
+                        min="1"
+                        max="30"
+                    />
+                </div>
+                <div class="settings-row">
+                    <label for="inputLong">Long break (min)</label>
+                    <input
+                        type="number"
+                        id="inputLong"
+                        value="15"
+                        min="1"
+                        max="60"
+                    />
+                </div>
+                <div class="settings-row">
+                    <label for="volumeSlider">Music volume</label>
+                    <input
+                        type="range"
+                        id="volumeSlider"
+                        min="0"
+                        max="1"
+                        step="0.05"
+                        value="0.4"
+                    />
+                </div>
+
+                <button class="settings-close" onclick="closeSettings()">
+                    Apply & Close
+                </button>
+            </div>
+        </div>
+
+        <!-- Audio -->
+        <audio id="alarmSound" src="ding.mp3" preload="auto"></audio>
+        <audio id="bgMusic" src="lofi.mp3" loop preload="none"></audio>
+
+        <!-- Custom Script -->
+        <script src="./script.js"></script>
+    </body>
+</html>
