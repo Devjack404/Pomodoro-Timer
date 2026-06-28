@@ -1,36 +1,76 @@
-<div class="container login-container">
-    <h1>STUDY WITH AS</h1>
+<!DOCTYPE html>
+<html lang="en">
 
-    <p class="subtitle">Welcome Back 👋</p>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <form id="loginForm">
-        <div class="input-group">
-            <label>Email</label>
+    <title>Login | Study With Us</title>
 
-            <input
-                type="email"
-                id="email"
-                placeholder="you@example.com"
-                required
-            />
-        </div>
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
-        <div class="input-group">
-            <label>Password</label>
+    <!-- CSS utama (background, container, dll.) -->
+    <link rel="stylesheet" href="../home/style.css">
 
-            <input
-                type="password"
-                id="password"
-                placeholder="••••••••"
-                required
-            />
-        </div>
+    <!-- CSS khusus login -->
+    <link rel="stylesheet" href="./login.css">
+</head>
 
-        <button class="login-btn">Login</button>
-    </form>
+<body>
 
-    <p class="register-link">
-        Don't have an account?
-        <a href="/register"> Create Account </a>
-    </p>
-</div>
+    <div class="overlay"></div>
+
+    <div class="container login-container">
+
+        <h1>STUDY WITH US</h1>
+
+        <p class="subtitle">
+            Welcome Back 👋
+        </p>
+
+        <form id="loginForm">
+
+            <div class="input-group">
+
+                <label>Email</label>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="you@example.com"
+                    required>
+
+            </div>
+
+            <div class="input-group">
+
+                <label>Password</label>
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="••••••••"
+                    required>
+
+            </div>
+
+            <button class="login-btn">
+                Login
+            </button>
+
+        </form>
+
+        <p class="register-link">
+            Don't have an account?
+            <a href="/register">
+                Create Account
+            </a>
+        </p>
+
+    </div>
+    <script src="./loginGsap.js"></script>
+
+</body>
+
+</html>
